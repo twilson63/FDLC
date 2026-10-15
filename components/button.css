@@ -1,0 +1,4 @@
+/* Harbor Ledger Button tokens only */
+.hl-button{background-color:var(--color-interactive-primary);color:var(--color-text-on-primary);border-radius:6px;padding:0.5rem 1rem;font-weight:600;cursor:pointer}
+.hl-button:hover{background-color:var(--color-interactive-primary-hover)}
+.hl-button:focus-visible{outline:2px solid var(--color-focus-ring);outline-offset:2px}
