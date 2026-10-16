@@ -1,1 +1,11 @@
-[{"fg":"text-primary","bg":"surface","kind":"text"},{"fg":"text-primary","bg":"surface-raised","kind":"text"},{"fg":"text-secondary","bg":"surface-raised","kind":"text"},{"fg":"text-on-primary","bg":"interactive-primary","kind":"text"},{"fg":"text-on-primary","bg":"interactive-primary-hover","kind":"text"},{"fg":"status-overdue-text","bg":"surface-raised","kind":"text"},{"fg":"status-success-text","bg":"surface-raised","kind":"text"},{"fg":"border-strong","bg":"surface-raised","kind":"non-text"},{"fg":"focus-ring","bg":"surface","kind":"non-text"}]
+[
+  {"fg": "text-primary", "bg": "surface", "kind": "text"},
+  {"fg": "text-primary", "bg": "surface-raised", "kind": "text"},
+  {"fg": "text-secondary", "bg": "surface-raised", "kind": "text"},
+  {"fg": "text-on-primary", "bg": "interactive-primary", "kind": "text"},
+  {"fg": "text-on-primary", "bg": "interactive-primary-hover", "kind": "text"},
+  {"fg": "status-overdue-text", "bg": "surface-raised", "kind": "text"},
+  {"fg": "status-success-text", "bg": "surface-raised", "kind": "text"},
+  {"fg": "border-strong", "bg": "surface-raised", "kind": "non-text"},
+  {"fg": "focus-ring", "bg": "surface", "kind": "non-text"}
+]

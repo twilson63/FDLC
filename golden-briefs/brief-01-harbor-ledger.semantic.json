@@ -1,0 +1,15 @@
+{
+  "color": {
+    "surface": { "$type": "color", "$value": "#F4F6F8", "$description": "Page background" },
+    "surface-raised": { "$type": "color", "$value": "#FFFFFF", "$description": "Cards, tables, modals" },
+    "text-primary": { "$type": "color", "$value": "#14213D", "$description": "Body and headings" },
+    "text-secondary": { "$type": "color", "$value": "#4A5568", "$description": "Metadata, helper text" },
+    "text-on-primary": { "$type": "color", "$value": "#FFFFFF", "$description": "Text on primary buttons" },
+    "interactive-primary": { "$type": "color", "$value": "#1E3A5F", "$description": "Primary button fill" },
+    "interactive-primary-hover": { "$type": "color", "$value": "#172E4D", "$description": "Primary button fill on hover" },
+    "border-strong": { "$type": "color", "$value": "#6B7280", "$description": "Input borders that carry meaning" },
+    "focus-ring": { "$type": "color", "$value": "#1D4ED8", "$description": "Keyboard focus indicator" },
+    "status-overdue-text": { "$type": "color", "$value": "#9B1C1C", "$description": "Overdue invoice label" },
+    "status-success-text": { "$type": "color", "$value": "#166534", "$description": "Paid invoice label" }
+  }
+}

@@ -1,1 +1,15 @@
-{"color":{"surface":{"$value":"{slate.050}"},"surface-raised":{"$value":"{white}"},"text-primary":{"$value":"{ink.900}"},"text-secondary":{"$value":"{slate.600}"},"text-on-primary":{"$value":"{white}"},"interactive-primary":{"$value":"{navy.800}"},"interactive-primary-hover":{"$value":"{navy.900}"},"border-strong":{"$value":"{gray.500}"},"focus-ring":{"$value":"{blue.700}"},"status-overdue-text":{"$value":"{red.800}"},"status-success-text":{"$value":"{green.800}"}}}
+{
+  "color": {
+    "surface": { "$type": "color", "$value": "{slate.050}", "$description": "Page background. Pair with text-primary 4.5:1." },
+    "surface-raised": { "$type": "color", "$value": "{white}", "$description": "Cards, tables, modals. Pair with text-primary/secondary." },
+    "text-primary": { "$type": "color", "$value": "{ink.900}", "$description": "Body and headings on surface/surface-raised." },
+    "text-secondary": { "$type": "color", "$value": "{slate.600}", "$description": "Metadata on surface-raised. 4.5:1." },
+    "text-on-primary": { "$type": "color", "$value": "{white}", "$description": "Text on interactive-primary/hover. 4.5:1." },
+    "interactive-primary": { "$type": "color", "$value": "{navy.800}", "$description": "Primary button fill." },
+    "interactive-primary-hover": { "$type": "color", "$value": "{navy.900}", "$description": "Primary button hover. Named token, never filter()." },
+    "border-strong": { "$type": "color", "$value": "{gray.500}", "$description": "Input borders. 3:1 UI." },
+    "focus-ring": { "$type": "color", "$value": "{blue.700}", "$description": "Keyboard focus. 3:1 UI, distinct from border." },
+    "status-overdue-text": { "$type": "color", "$value": "{red.800}", "$description": "Overdue label. Always with 'Overdue' text, never color alone." },
+    "status-success-text": { "$type": "color", "$value": "{green.800}", "$description": "Paid label. 4.5:1 on surface-raised." }
+  }
+}

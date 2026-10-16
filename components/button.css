@@ -1,4 +1,18 @@
-/* Harbor Ledger Button tokens only */
-.hl-button{background-color:var(--color-interactive-primary);color:var(--color-text-on-primary);border-radius:6px;padding:0.5rem 1rem;font-weight:600;cursor:pointer}
-.hl-button:hover{background-color:var(--color-interactive-primary-hover)}
-.hl-button:focus-visible{outline:2px solid var(--color-focus-ring);outline-offset:2px}
+/* Harbor Ledger — Button. Tokens only: no raw hex, no primitives. */
+.hl-button {
+  background-color: var(--color-interactive-primary);
+  color: var(--color-text-on-primary);
+  border: 1px solid transparent;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.hl-button:hover { background-color: var(--color-interactive-primary-hover); }
+.hl-button:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+.hl-button:disabled { opacity: 0.5; cursor: not-allowed; }
+@media (prefers-reduced-motion: reduce) { .hl-button { transition: none; } }

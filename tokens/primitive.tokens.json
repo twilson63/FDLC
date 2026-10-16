@@ -1,1 +1,33 @@
-{"slate":{"050":{"$value":"#F4F6F8"},"600":{"$value":"#4A5568"}},"white":{"$value":"#FFFFFF"},"ink":{"900":{"$value":"#14213D"}},"navy":{"800":{"$value":"#1E3A5F"},"900":{"$value":"#172E4D"}},"gray":{"500":{"$value":"#6B7280"}},"blue":{"700":{"$value":"#1D4ED8"}},"red":{"800":{"$value":"#9B1C1C"}},"green":{"800":{"$value":"#166534"}}}
+{
+  "slate": {
+    "$type": "color",
+    "050": { "$value": "#F4F6F8", "$description": "Harbor page background tint" },
+    "600": { "$value": "#4A5568", "$description": "Secondary text gray" }
+  },
+  "white": { "$type": "color", "$value": "#FFFFFF", "$description": "Base white" },
+  "ink": {
+    "$type": "color",
+    "900": { "$value": "#14213D", "$description": "Harbor primary ink" }
+  },
+  "navy": {
+    "$type": "color",
+    "800": { "$value": "#1E3A5F", "$description": "Harbor primary action" },
+    "900": { "$value": "#172E4D", "$description": "Harbor primary hover" }
+  },
+  "gray": {
+    "$type": "color",
+    "500": { "$value": "#6B7280", "$description": "Strong border gray" }
+  },
+  "blue": {
+    "$type": "color",
+    "700": { "$value": "#1D4ED8", "$description": "Focus blue" }
+  },
+  "red": {
+    "$type": "color",
+    "800": { "$value": "#9B1C1C", "$description": "Overdue red" }
+  },
+  "green": {
+    "$type": "color",
+    "800": { "$value": "#166534", "$description": "Success green" }
+  }
+}
