@@ -1,5 +1,6 @@
 """validate_brief.py - FDLC gate 1. Validates intake brief YAML before any work starts.
-Usage: python validate_brief.py --brief brief.yaml [--known-ids a,b,c]
+Usage: python validate_brief.py --brief brief.yaml|brief.md [--known-ids a,b,c]
+A .md brief is read from its first ```yaml block.
 Exit 0 = valid, 1 = invalid, 2 = bad input/file. Rules from intake-brief-template.md rev 711.
 """
 import argparse, re, sys
@@ -15,7 +16,13 @@ def main():
     ap.add_argument("--known-ids", default="")
     a = ap.parse_args()
     try:
-        with open(a.brief) as f: b = yaml.safe_load(f) or {}
+        with open(a.brief) as f: text = f.read()
+        if a.brief.endswith(".md"):
+            # golden briefs are markdown; the brief is the first ```yaml block
+            m = re.search(r'^```ya?ml\n(.*?)^```', text, re.M | re.S)
+            if not m: print(f"ERROR: no ```yaml block in {a.brief}", file=sys.stderr); sys.exit(2)
+            text = m.group(1)
+        b = yaml.safe_load(text) or {}
     except FileNotFoundError:
         print(f"ERROR: brief file not found: {a.brief}", file=sys.stderr); sys.exit(2)
     except Exception as e:

@@ -1,0 +1,59 @@
+{
+  "color": {
+    "surface": {
+      "$type": "color",
+      "$value": "#F4F6F8",
+      "$description": "Page background. Pair with text-primary 4.5:1."
+    },
+    "surface-raised": {
+      "$type": "color",
+      "$value": "#FFFFFF",
+      "$description": "Cards, tables, modals. Pair with text-primary/secondary."
+    },
+    "text-primary": {
+      "$type": "color",
+      "$value": "#14213D",
+      "$description": "Body and headings on surface/surface-raised."
+    },
+    "text-secondary": {
+      "$type": "color",
+      "$value": "#4A5568",
+      "$description": "Metadata on surface-raised. 4.5:1."
+    },
+    "text-on-primary": {
+      "$type": "color",
+      "$value": "#FFFFFF",
+      "$description": "Text on interactive-primary/hover. 4.5:1."
+    },
+    "interactive-primary": {
+      "$type": "color",
+      "$value": "#1E3A5F",
+      "$description": "Primary button fill."
+    },
+    "interactive-primary-hover": {
+      "$type": "color",
+      "$value": "#172E4D",
+      "$description": "Primary button hover. Named token, never filter()."
+    },
+    "border-strong": {
+      "$type": "color",
+      "$value": "#6B7280",
+      "$description": "Input borders. 3:1 UI."
+    },
+    "focus-ring": {
+      "$type": "color",
+      "$value": "#1D4ED8",
+      "$description": "Keyboard focus. 3:1 UI, distinct from border."
+    },
+    "status-overdue-text": {
+      "$type": "color",
+      "$value": "#9B1C1C",
+      "$description": "Overdue label. Always with 'Overdue' text, never color alone."
+    },
+    "status-success-text": {
+      "$type": "color",
+      "$value": "#166534",
+      "$description": "Paid label. 4.5:1 on surface-raised."
+    }
+  }
+}

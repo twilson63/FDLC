@@ -1,12 +1,13 @@
 """score_run.py - FDLC gate 2. Scores a run against golden-brief-01 deterministic checklist.
-Usage: python score_run.py --tokens semantic.json --css dist/tokens.css --components components/ [--pairs pairs.json]
+Usage: python score_run.py --tokens semantic.json --css dist/tokens.css --components components/ [--pairs pairs.json --resolved semantic.resolved.json]
+--resolved supplies hex values for the contrast pairs when --tokens holds {refs}.
 Exit 0 = all pass, 1 = any fail, 2 = bad input.
 """
 import argparse, json, re, sys, os, glob
-HEX_RE = re.compile(r'#[0-9a-fA-F]{3,8}\\b')
-RGB_RE = re.compile(r'\\b(rgb|hsl|oklch|oklab)\\s*\\(', re.I)
+HEX_RE = re.compile(r'#[0-9a-fA-F]{3,8}\b')
+RGB_RE = re.compile(r'\b(rgb|hsl|oklch|oklab)\s*\(', re.I)
 NAMED = {"red","blue","green","black","white","gray","grey","navy","teal","orange","purple","pink","yellow","brown","beige","ivory","maroon","olive","lime","aqua","silver"}
-COLOR_PROP = re.compile(r'(?<![a-zA-Z-])(color|background(?:-color)?|border(?:-top|-right|-bottom|-left)?(?:-color)?|outline-color|fill|stroke|box-shadow|text-decoration-color)\\s*:', re.I)
+COLOR_PROP = re.compile(r'(?<![a-zA-Z-])(color|background(?:-color)?|border(?:-top|-right|-bottom|-left)?(?:-color)?|outline-color|fill|stroke|box-shadow|text-decoration-color)\s*:', re.I)
 def load_json(p):
     with open(p) as f: return json.load(f)
 def flatten_tokens(node, prefix=""):
@@ -25,6 +26,7 @@ def main():
     ap.add_argument("--css")
     ap.add_argument("--components")
     ap.add_argument("--pairs")
+    ap.add_argument("--resolved")
     a = ap.parse_args()
     try: sem = load_json(a.tokens)
     except Exception as e: print(f"ERROR: bad tokens: {e}", file=sys.stderr); sys.exit(2)
@@ -54,19 +56,19 @@ def main():
         viols=[]
         allcss=""
         for fp in files:
-            txt=open(fp).read(); allcss+=txt+"\\n"
+            txt=open(fp).read(); allcss+=txt+"\n"
             for i,line in enumerate(txt.splitlines(),1):
                 if COLOR_PROP.search(line) and (HEX_RE.search(line) or RGB_RE.search(line)):
                     viols.append(f"{os.path.basename(fp)}:{i}")
                 if COLOR_PROP.search(line):
-                    for w in re.findall(r':\\s*([a-z]+)', line.lower()):
+                    for w in re.findall(r':\s*([a-z]+)', line.lower()):
                         if w in NAMED: viols.append(f"{os.path.basename(fp)}:{i}:{w}")
         chk("components:no-hardcoded-colors", not viols, "; ".join(viols[:5]) if viols else f"{len(files)} files clean")
         chk("components:hover-token", "interactive-primary-hover" in allcss, "found" if "interactive-primary-hover" in allcss else "missing")
     if a.pairs:
         try:
             pairs = load_json(a.pairs)
-            plist = pairs.get("pairs", pairs if isinstance(pairs, list) else [])
+            plist = pairs if isinstance(pairs, list) else pairs.get("pairs", [])
             def lum(h):
                 h=h.lstrip("#"); r,g,b=[int(h[i:i+2],16)/255 for i in (0,2,4)]
                 f=lambda c: c/12.92 if c<=0.04045 else ((c+0.055)/1.055)**2.4
@@ -75,16 +77,17 @@ def main():
             def ratio(x,y):
                 l1,l2=lum(x),lum(y); hi,lo=max(l1,l2),min(l1,l2); return (hi+0.05)/(lo+0.05)
             hexmap={}
-            for k,v in flat.items():
+            for k,v in (flatten_tokens(load_json(a.resolved)) if a.resolved else flat).items():
                 val=v.get("$value","")
                 if isinstance(val,str) and HEX_RE.fullmatch(val.strip()): hexmap[k]=val.strip(); hexmap[k.split(".")[-1]]=val.strip()
             fails=[]
             for p in plist:
-                t=p.get("text",{}); bg=p.get("background",{})
-                th=p.get("threshold",4.5)
-                thx=hexmap.get(t.get("token","")); bgx=hexmap.get(bg.get("token",""))
-                if not thx or not bgx: fails.append(f"{t.get('token')}/{bg.get('token')}:unresolved"); continue
-                if ratio(thx,bgx) < th: fails.append(f"{t.get('token')}/{bg.get('token')}:{ratio(thx,bgx):.2f}<{th}")
+                # {"fg","bg","kind"} as in golden-briefs/*.pairs.json, or {"text":{"token"},"background":{"token"},"threshold"}
+                if "fg" in p: ft,bt,th=p["fg"],p["bg"],{"text":4.5,"large-text":3.0,"non-text":3.0}.get(p.get("kind","text"),4.5)
+                else: ft,bt,th=p.get("text",{}).get("token",""),p.get("background",{}).get("token",""),p.get("threshold",4.5)
+                thx=hexmap.get(ft); bgx=hexmap.get(bt)
+                if not thx or not bgx: fails.append(f"{ft}/{bt}:unresolved"); continue
+                if ratio(thx,bgx) < th: fails.append(f"{ft}/{bt}:{ratio(thx,bgx):.2f}<{th}")
             chk("contrast:pairs", not fails, "; ".join(fails[:5]) if fails else f"{len(plist)} pairs pass")
         except Exception as e: chk("contrast:pairs", False, str(e))
     fails=[c for c in checks if not c["pass"]]

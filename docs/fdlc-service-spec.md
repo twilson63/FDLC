@@ -121,8 +121,7 @@ Checkpoint note: Jev breaks like an LLM — prompt injection works against typed
 decisions:
   - route_brief: [archetype probabilities]
   - judge_distinctiveness: [distinctive vs generic, threshold 0.7 reject]
-  - judge_principle_f
-it: [on-principle vs off-principle]
+  - judge_principle_fit: [on-principle vs off-principle]
 rules:
   - deterministic checks override Jev always
   - Jev never outputs hex, tokens, or CSS

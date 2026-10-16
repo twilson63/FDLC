@@ -4,9 +4,9 @@ Usage: lint-no-hardcoded-colors.py <file-or-dir> [...]
 Exit 0 = clean, 1 = violations found, 2 = bad input."""
 import re, sys, pathlib
 
-HEX = re.compile(r'#(?:[0-9a-fA-F]{3,4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})\\b')
-FUNC = re.compile(r'\\b(?:rgba?|hsla?|hwb|lab|lch|oklab|oklch)\\s*\\(', re.I)
-NAMED = re.compile(r'(?<!\\w-)(?:red|blue|green|black|white|gray|grey|orange|purple|yellow)(?!\\w-)', re.I)
+HEX = re.compile(r'#(?:[0-9a-fA-F]{3,4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})\b')
+FUNC = re.compile(r'\b(?:rgba?|hsla?|hwb|lab|lch|oklab|oklch)\s*\(', re.I)
+NAMED = re.compile(r'(?<![\w-])(?:red|blue|green|black|white|gray|grey|orange|purple|yellow)(?![\w-])', re.I)
 EXTS = {'.css', '.scss', '.tsx', '.jsx', '.ts', '.js', '.vue', '.html'}
 
 def scan(path):
@@ -15,7 +15,7 @@ def scan(path):
         code = line.split('//')[0] if path.suffix in {'.ts','.tsx','.js','.jsx'} else line
         if HEX.search(code) or FUNC.search(code):
             hits.append((n, line.strip()))
-        elif NAMED.search(code) and re.search(r'(color|background|border|fill|stroke)\\s*:', code, re.I):
+        elif NAMED.search(code) and re.search(r'(color|background|border|fill|stroke)\s*:', code, re.I):
             hits.append((n, line.strip()))
     return hits
 

@@ -12,10 +12,11 @@ A fictional product used to test the design factory. Not a real company.
 ## Input brief (YAML)
 
 ```yaml
+brief_id: brief-01-harbor-ledger
 product:
   name: Harbor Ledger
-  type: web app, invoicing dashboard
-  description: Freelancers create invoices, track payments, and see what's overdue.
+  type: saas-dashboard
+  summary: Freelancer invoicing web app. Freelancers create invoices, track payments, and see what's overdue.
 audience:
   primary: Solo freelancers, 28-50, non-designers
   context: Checking cash flow on a laptop between client calls

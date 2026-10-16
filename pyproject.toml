@@ -1,12 +1,21 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "fdlc"
 version = "0.1.0"
 description = "Factory Design Life Cycle — agents generate, checks reject, humans approve"
 readme = "README.md"
 requires-python = ">=3.10"
+dependencies = ["pyyaml>=6"]  # validate_brief.py
 
 [project.optional-dependencies]
 dev = []
+
+# checks/ are standalone scripts, not an importable package
+[tool.setuptools]
+py-modules = []
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
